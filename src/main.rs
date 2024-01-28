@@ -1,16 +1,9 @@
+use anyhow::Result;
+
 mod cli;
 mod utils;
 
-#[derive(thiserror::Error, Debug)]
-pub enum Error {
-    #[error("parameter not setup")]
-    ParamNotSetup,
-    #[error(transparent)]
-    Bincode(#[from] bincode::Error),
-}
-
-
-fn main() -> Result<(), Error> {
+fn main() -> Result<()> {
     let matches = cli::parse_args();
     let command = cli::get_command(matches);
 

@@ -1,6 +1,7 @@
 use std::path::Path;
 use clap::{App, Arg, SubCommand, ArgMatches};
-use bincode::Error;
+use anyhow::Result;
+
 use snark_verifier_sdk::halo2::read_snark;
 use crate::utils::verify;
 
@@ -51,20 +52,20 @@ pub fn get_command(matches: ArgMatches<'static>) -> Command {
     }
 }
 
-pub fn handle_read<P: AsRef<Path>>(path: P) -> Result<(), Error> {
+pub fn handle_read<P: AsRef<Path>>(path: P) -> Result<()> {
     println!("Reading snark from: {:?}", path.as_ref());
     let snark = read_snark(path)?;
     dbg!(snark);
     Ok(())
 }
 
-pub fn handle_verify<P: AsRef<Path>>(path: P) -> Result<(), Error> {
+pub fn handle_verify<P: AsRef<Path>>(path: P) -> Result<()> {
     let snark = read_snark(path)?;
     verify(&snark);
     Ok(())
 }
 
-pub fn handle_aggregate<P: AsRef<Path>>(path: P, _is_recursive: bool) -> Result<(), Error> {
+pub fn handle_aggregate<P: AsRef<Path>>(path: P, _is_recursive: bool) -> Result<()> {
     println!("Aggregate snarks from: {:?}", path.as_ref());
     // Implement read functionality here
     Ok(())
