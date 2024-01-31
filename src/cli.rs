@@ -3,7 +3,7 @@ use clap::{App, Arg, SubCommand, ArgMatches};
 use anyhow::Result;
 
 use snark_verifier_sdk::halo2::read_snark;
-use crate::utils::verify;
+use crate::utils::{aggregate, verify};
 
 pub fn parse_args() -> ArgMatches<'static> {
     App::new("Snark Verify CLI")
@@ -52,21 +52,20 @@ pub fn get_command(matches: ArgMatches<'static>) -> Command {
     }
 }
 
-pub fn handle_read<P: AsRef<Path>>(path: P) -> Result<()> {
+pub fn handle_read(path: impl AsRef<Path>) -> Result<()> {
     println!("Reading snark from: {:?}", path.as_ref());
     let snark = read_snark(path)?;
     dbg!(snark);
     Ok(())
 }
 
-pub fn handle_verify<P: AsRef<Path>>(path: P) -> Result<()> {
+pub fn handle_verify(path: impl AsRef<Path>) -> Result<()> {
+    println!("Verifying snark from: {:?}", path.as_ref());
     let snark = read_snark(path)?;
-    verify(&snark);
-    Ok(())
+    verify(&snark)
 }
 
-pub fn handle_aggregate<P: AsRef<Path>>(path: P, _is_recursive: bool) -> Result<()> {
+pub fn handle_aggregate(path: impl AsRef<Path>, is_recursive: bool) -> Result<()> {
     println!("Aggregate snarks from: {:?}", path.as_ref());
-    // Implement read functionality here
-    Ok(())
+    aggregate(path, is_recursive)
 }

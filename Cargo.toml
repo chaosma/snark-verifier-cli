@@ -18,9 +18,6 @@ ahash = "=0.8.6"
 colored = "=2.0.0"
 
 [features]
-default = ["halo2-axiom"]
+default = ["halo2-axiom", "display"]
 halo2-axiom = ["snark-verifier/halo2-axiom"]
-
-#[patch."https://github.com/axiom-crypto/snark-verifier.git"]
-#snark-verifier = { path = "../snark-verifier/snark-verifier" }
-#snark-verifier-sdk = { path = "../snark-verifier/snark-verifier-sdk" }
+display = ["snark-verifier/display"]
