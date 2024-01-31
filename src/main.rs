@@ -12,5 +12,6 @@ fn main() -> Result<()> {
         cli::Command::Verify(path) => cli::handle_verify(path)?,
         cli::Command::Aggregate { path, recursive } => cli::handle_aggregate(path, recursive)?,
     }
+    println!("everything is okay");
     Ok(())
 }
