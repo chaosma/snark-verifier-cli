@@ -16,7 +16,7 @@ Make sure to choose the correct rustc version (see rust-toolchain). Download kzg
 
 The snark-verifier accepts a specific format. Let's denote it as ".snark" file. A snark file includes the proof of a plonkish circuit and protocol information used by proof aggregation.
 
-`snark-verifier-cli` has $3$ commands. `read` command reads a snark file and print it out. `verify` command verifies a snark file. `aggregate` command aggregates multiple proofs inside a fold.
+`snark-verifier-cli` has $3$ commands. `read` command reads a snark file and print it out. `verify` command verifies a snark file. `aggregate` command aggregates multiple proofs inside a folder.
 
 Here are some command examples:
 

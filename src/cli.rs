@@ -1,36 +1,50 @@
-use std::path::Path;
-use clap::{App, Arg, SubCommand, ArgMatches};
 use anyhow::Result;
+use clap::{App, Arg, ArgMatches, SubCommand};
+use std::path::Path;
 
-use snark_verifier_sdk::halo2::read_snark;
 use crate::utils::{aggregate, verify};
+use snark_verifier_sdk::halo2::read_snark;
 
 pub fn parse_args() -> ArgMatches<'static> {
     App::new("Snark Verify CLI")
         .version("1.0")
         .author("snarkify.io")
         .about("Commandline tools for snark proofs aggregation")
-        .subcommand(SubCommand::with_name("read")
-            .about("Reads data from a specified path")
-            .arg(Arg::with_name("path")
-                 .help("Path to the data location")
-                 .required(true)
-                 .index(1)))
-        .subcommand(SubCommand::with_name("verify")
-            .about("Verifies data at a specified path")
-            .arg(Arg::with_name("path")
-                 .help("Path to the data location")
-                 .required(true)
-                 .index(1)))
-        .subcommand(SubCommand::with_name("aggregate")
-            .about("Aggregates data from a specified path")
-            .arg(Arg::with_name("path")
-                 .help("Path to the data location")
-                 .required(true)
-                 .index(1))
-            .arg(Arg::with_name("recursive")
-                 .help("Aggregate data recursively")
-                 .long("recursive")))
+        .subcommand(
+            SubCommand::with_name("read")
+                .about("Reads data from a specified path")
+                .arg(
+                    Arg::with_name("path")
+                        .help("Path to the data location")
+                        .required(true)
+                        .index(1),
+                ),
+        )
+        .subcommand(
+            SubCommand::with_name("verify")
+                .about("Verifies data at a specified path")
+                .arg(
+                    Arg::with_name("path")
+                        .help("Path to the data location")
+                        .required(true)
+                        .index(1),
+                ),
+        )
+        .subcommand(
+            SubCommand::with_name("aggregate")
+                .about("Aggregates data from a specified path")
+                .arg(
+                    Arg::with_name("path")
+                        .help("Path to the data location")
+                        .required(true)
+                        .index(1),
+                )
+                .arg(
+                    Arg::with_name("recursive")
+                        .help("Aggregate data recursively")
+                        .long("recursive"),
+                ),
+        )
         .get_matches()
 }
 
